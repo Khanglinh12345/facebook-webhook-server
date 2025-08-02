@@ -49,7 +49,7 @@ def create_label(name):
     if response.status_code == 200:
         return response.json()["id"]
     else:
-        print(f"❌ Lỗi tạo label '{name}': {response.text}")
+        print(f"❌ Không thể tạo label '{name}': {response.status_code} - {response.text}")
         return None
 
 # 📌 Gắn tag cho người dùng
@@ -79,11 +79,15 @@ def webhook():
     current_index = state["current_index"]
     processed_psids = set(state["processed_psids"])
 
+    if not labels:
+        print("⚠️ Chưa có label nào được tạo.")
+        return "No labels", 200
+
     data = request.json
     for entry in data.get("entry", []):
         for messaging in entry.get("messaging", []):
             sender_id = messaging["sender"]["id"]
-            if sender_id not in processed_psids and labels:
+            if sender_id not in processed_psids:
                 tag = labels[current_index]
                 tag_id = tag["id"]
                 tag_name = tag["name"]
@@ -111,9 +115,12 @@ def init_labels():
     save_labels(created)
     return f"Đã tạo {len(created)} label thành công.", 200
 
+# ✅ Route mặc định để kiểm tra app đang chạy
+@app.route("/")
+def home():
+    return "Auto Tag Bot is running!"
+
 # 🚀 Khởi chạy server
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-
-
