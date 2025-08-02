@@ -8,8 +8,8 @@ app = Flask(__name__)
 # 🔐 Token xác minh webhook
 VERIFY_TOKEN = "my_verify_token"
 
-# 🔑 Token truy cập trang (lấy từ Facebook Developer)
-PAGE_ACCESS_TOKEN = "your_page_access_token"
+# 🔑 Token truy cập trang (token thật bạn cung cấp)
+PAGE_ACCESS_TOKEN = "EAAQVxdOj0qYBPGnFN4rm6aQQuqMKYg7yol1wULU3bFFu1jhNSTQaMDb6fbdB9liVE8ITK8vEKrB9p4qDrRX4brTf9zFRuy76lEKkGPZB5ZA7Ma87aa8j2WCBybpD2eq1dZBlCKfcUJPHtpQ0UrL1tCCEnKk0Nd7CDIaPNwPMG67IUanpZCZBIaGZCVyZBHdUfstjbZActP6cnz5OaHArGLc7gyih0QZDZD"
 
 # 🏷️ Danh sách tag ID tương ứng với từng nhân sự
 TAGS = [
